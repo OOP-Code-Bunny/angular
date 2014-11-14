@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <script src="angular.js"></script>
+  <script src="script.js"></script>
+</head>
+<body>
+  <div ng-controller="GreetCtrl">Hello {{name}}!</div>
+  <div ng-controller="ListCtrl">
+    <ol><li ng-repeat="name in names">{{name}}</li></ol>
+  </div>
+</body>
+</html>
+
+<!--两个控制器分别是两个作用域,在script.js里分别定义了它们里面的name变量的值-->
+
+
+

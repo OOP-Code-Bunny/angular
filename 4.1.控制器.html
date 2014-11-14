@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <script src="angular.js"></script>
+  <script src="script.js"></script>
+</head>
+<body>
+  <div ng-controller="MyCtrl">
+    Hello {{name}}!
+    <button ng-click="action()">OK</button>
+  </div>
+</body>
+</html>
+
+<!--
+MyCtrl是一个控制器,
+ng-click绑定点击事件,其中的action函数,就是MyCtrl控制器中的action函数.在script.js中写入
+-->
+
+

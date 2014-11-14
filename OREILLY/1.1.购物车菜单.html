@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <title>1.1实例:购物车</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script src="script.js"></script>
+  <style type="text/css">
+    .red {
+      color:#cc0000
+    }
+    * {
+      font-family:'MICROSOFT YAHEI'
+    }
+    TD {
+      font-size:12px; color:#999;
+    }
+  </style>
+</head>
+<body >
+  <div ng-controller="CarController">
+    <h1>your shopping cart</h1>
+    <table>
+      <tr ng-repeat="item in items">
+        <td>{{item.title}}</td>
+        <td><input ng-model="item.quantity"/></td>
+        <td>{{item.price|currency}}</td>
+        <td class="red">{{item.price*item.quantity|currency}}</td>
+        <td><button ng-click="remove($index)">remove</button></td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>
+
+
+
+
+
+

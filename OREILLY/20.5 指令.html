@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="dirAppModule">
+<head>
+  <title>20.5指令</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script type="text/ng-template" id="text.html">
+    <div>
+      <h3>{{title}}</h3>
+      <div ng-transclude></div>
+    </div>
+  </script>
+  <script src="script.js"></script>
+
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+    h3 {
+      color:#CB2027
+    }
+  </style>
+</head>
+<body>
+  <input ng-model="title"/>
+  <br/>
+  <textarea cols="30" rows="4" ng-model="text"></textarea>
+  <div cd-text>{{text}}</div>
+</body>
+</html>
+
+
+
+
+
+

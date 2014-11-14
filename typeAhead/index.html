@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="typeAhead">
+<head>
+  <title>预输入插件</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+  <script src="../angular.js"></script>
+  <script type="text/ng-template" id="template">
+    <h4 class="text-center">angular指令创建的预输入插件</h4>
+    <form role="form">
+      <div class="form-group">
+        <input type="text" ng-model="model" class="form-control" ng-keydown="ifChooseShow=true" placeholder="{{def}}">
+        <div class="list-group" ng-show="ifChooseShow && model">
+          <a href="" hover-active class="list-group-item" ng-repeat="item in items | filter: model" ng-click="choose(item['name'])">
+            <h4><span class="glyphicon glyphicon-map-marker"></span>{{item['name']}}</h4>
+            <p>{{item['abbreviation']}}</p>
+          </a>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </script>
+  <script src="script.js"></script>
+
+  <link rel="stylesheet" href="bootstrap.css"/>
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px;
+      margin:0;padding:0
+    }
+    body {
+      background:#F7F7F9
+    }
+    .main {
+      width:90%; background:#fff; box-shadow: 1px 1px 1px #ccc; margin:auto; border-radius:5px; margin-top:10px; padding:10px; box-sizing: border-box;
+    }
+
+  </style>
+</head>
+<body>
+<div class="container" ng-controller="tahCtrl">
+  <typeahead items="items" model="model" default-value="Enter for search state" choosed="chooseCallback(name)"></typeahead>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

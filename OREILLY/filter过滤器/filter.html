@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+  <title>filter过滤器</title>
+  <meta charset="utf-8">
+  <script src="../../angular.min.js"></script>
+  <style type="text/css">
+
+    * {
+      font-family:'MICROSOFT YAHEI'; color:#737373;
+    }
+    b {
+      font-weight:normal; color:#169FE7;
+    }
+
+  </style>
+</head>
+<body >
+  <div ng-controller="ctrl">
+    <ul>
+      <li ng-repeat="list in lists|filter:condition:mode">
+        <span><b>name:</b>{{list.name}}</span>
+        <br/>
+        <span><b>age:</b>{{list.age}}</span>
+      </li>
+    </ul>
+  </div>
+</body>
+<script>
+  //angular1.0版本没有深度匹配这个概念
+  var app = angular.module('app',[]);
+  app.controller('ctrl',function($scope,$filter){
+    /*普通模式,第三个参数为false:*/
+    //$scope.mode=false;
+    //1.一个字符串:匹配属性中带有这个字符串的内容
+    //$scope.condition='1';
+
+    //2.一个对象: 相当于$scope.condition='1';
+    //$scope.condition={$:'1'};
+
+    //3.一个对象: 匹配name属性值中带有1的
+    //$scope.condition={name:'1'};
+
+    //4.一个对象: 匹配name属性值中带有bunny,age属性值中带有1的
+    //$scope.condition={name:'bunny',age:1};
+
+    /*严格模式,第三个参数为true*/
+    //$scope.mode=true;
+    //5.严格匹配字符串: 匹配属性值===1的.注意是===,格式也必须相等
+    //$scope.condition=1;
+
+    //6.严格匹配对象: 匹配属性值===1的.同'5'
+    //$scope.condition={$:1};
+
+    //7.严格匹配对象: name值==='white_bunny_1',age值===11的
+    //$scope.condition={name:'white_bunny_1',age:11};
+
+    /*深度匹配:第三个参数为一个函数*/
+    //8.深度匹配对象:{name:'c'},自定义一个过滤方法:name属性必须为c开头
+    //actual就是对象实际name属性值,expected就是'c'
+/*    $scope.mode=function(actual,expected){
+      if(actual.indexOf(expected)==0){
+        return true
+      }
+      else {
+        return false
+      }
+    };
+    $scope.condition={name:'c'};*/
+
+    //9.深度匹配对象:{name:'mi_bunny_1',age:'10'}
+    //要求过滤的方式是比较是否相等,但不比较数据格式.比如这里的'10'==10,可以被过滤出来
+/*    $scope.mode=function(actual,expected){
+      if(actual==expected){
+        return true
+      }
+    };
+    $scope.condition={name:'mi_bunny_2',age:'10'};*/
+
+    //10.深度匹配字符串:'11':匹配年龄或者name==11的
+/*    $scope.mode=function(actual,expected){
+      if(actual==expected){
+        return true
+      }
+    };
+    $scope.condition='11';*/
+
+    /*匹配一个函数*/
+/*    $scope.condition = function(value){
+      if(value.name.indexOf('m')>=0 && value.name.indexOf('b')>=0){
+        return true
+      }
+    };*/
+
+
+    $scope.lists = [
+      {name:'code_bunny',age:12},
+      {name:'code_dog',age:3},
+      {name:'code_cat',age:22},
+      {name:'white_bunny_1',age:11},
+      {name:'white_bunny_2',age:11},
+      {name:'black_bunny',age:9},
+      {name:'mi_bunny_1',age:2},
+      {name:'mi_bunny_2',age:10},
+      {name:'mi_bunny_2',age:1}
+    ];
+
+    //直接在js里面使用:
+    var newArray = $filter('filter')($scope.lists, 'black', false);
+    console.log(newArray);
+
+  })
+</script>
+</html>
+
+
+
+
+
+
+
+

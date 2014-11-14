@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="NRPPlayer">
+<head>
+  <title>NRPplayer</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+  <script src="../angular.js"></script>
+  <script src="script.js"></script>
+  <script type="text/ng-template" id="player.html">
+      <audio>
+        <source src="情人结.mp3"/>
+      </audio>
+      <div class="row">
+        <div class="progress">
+          <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{progress}}%">
+            <span class="sr-only">{{progress}}% Complete (success)</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="btn-toolbar">
+          <div class="btn-group">
+            <button type="button" class="btn btn-success" ng-click="back()"><span class="glyphicon glyphicon-backward"></span></button>
+            <button type="button" class="btn btn-success" ng-click="play()" ng-hide="playing">play</button>
+            <button type="button" class="btn btn-success" ng-click="stop()" ng-show="playing">stop</button>
+            <button type="button" class="btn btn-success" ng-click="go()"><span class="glyphicon glyphicon-forward"></span></button>
+          </div>
+          <button type="button" class="btn btn-success" ng-click="silence()" ng-hide="muted"><span class="glyphicon glyphicon-volume-off"></span></button>
+          <button type="button" class="btn btn-success" ng-click="sound()" ng-show="muted"><span class="glyphicon glyphicon-volume-up"></span></button>
+          <div class="vol-control"><span></span><em></em></div>
+        </div>
+      </div>
+  </script>
+  <link rel="stylesheet" href="bootstrap.css"/>
+  <style type="text/css">
+    * {
+      font-family:'MICROSOFT YAHEI'
+    }
+    body {
+      background:#C0DCC0
+    }
+    .vol-control {
+      width:160px; height:10px; background:#F5F5F5; border-radius:5px; display:inline-block; margin-left:5px; vertical-align: -2px; position:relative
+    }
+    .vol-control span {
+      display:block; width:80px; height:10px; background:#5CB85C; border-radius:5px 0 0 5px
+    }
+    .vol-control em {
+      display:block; width:16px; height:16px; border-radius:100%; background:#F5F5F5; box-shadow: 1px 1px 1px #5CB85C; position:absolute; left:80px;
+      top:-3px; margin-left:-8px
+    }
+
+  </style>
+</head>
+<body>
+<div class="container">
+  <h4>基于angularjs的NRP Player</h4>
+  <audio-player></audio-player>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

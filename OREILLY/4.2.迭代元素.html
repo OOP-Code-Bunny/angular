@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <title>4.2.迭代</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script src="script.js"></script>
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+    span {
+      margin-right:20px; width:200px;
+    }
+    .index {
+      color:green;
+    }
+    .name a {
+      color:blueviolet;
+    }
+    .score {
+      color:crimson;
+    }
+
+  </style>
+</head>
+<body>
+<div ng-controller="StudentList">
+  <ul>
+    <li ng-repeat="student in students">
+      <span class="index">{{$index+1}}</span><span class="name"><a href="/student/view/{{student.id}}" class="name">{{student.name}}</a></span><span
+            class="score">{{student.score}}</span>
+    </li>
+  </ul>
+  <button ng-click="insertDog()">添加</button>
+  <button ng-click="delLast()">删除</button>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

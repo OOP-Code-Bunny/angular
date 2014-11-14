@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <title>13.1过滤器</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script src="script.js"></script>
+  <style type="text/css">
+    *{
+      font-family:"Microsoft Yahei";
+      FONT-SIZE:12px
+    }
+  </style>
+</head>
+<body>
+<div ng-controller="filter">
+  <span>{{num | number:2 }}</span>
+  <br>
+  <span>{{num | number:0 }}</span>
+  <br>
+  <span>{{num | number:0 | currency }}</span>
+  <br>
+  <span>{{num | currency }}</span>
+  <br>
+  <span>{{day | date }}</span>
+  <br>
+  <span>{{word | uppercase}}</span>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+

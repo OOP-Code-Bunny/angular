@@ -1,0 +1,85 @@
+$resource返回的一定是一个json的对象,不能是字符串对象,如果返回的是字符串,它会把字符串一个一个拆开来,变成
+{
+    0:我,
+    1:爱,
+    2:你
+}
+这种json格式,就算是query方法返回的数组,数组里面的每个值,也必须是json格式,如果是字符串,也会按照同样的方式被处理成json
+
+1. $http直接返回字符串,返回card的name值
+   $resource返回的是json对象,返回整个card对象,通过{{card_1['name']}}属性来获取卡的name值
+
+
+2. $resource中使用promise返回的RESTful资源的修改问题
+/*
+错误的方法,card_3是一个promise,而不是真正的返回的3号card.真正的返回的3号card其实是card_3下面的$$v对象.
+要访问$$v对象,可以使用then方法,传入回调函数的第一个参数就是$$v对象,也就是真正的3号card.它是一个ngResource资源,具有$save方法
+注意,虽然card_3其实是不具备name属性的,但是angular已经做了处理,在渲染模板的时候,{{card_3['name']}}访问到的其实就是card_3的$$v对象的name属性,
+所以,只要card_3的$$v的那么属性发生变化,视图也会同时变化,但是相反,card_3真正的name属性发生变化,它不会去理会
+
+$scope.card_3 = httpCard.getById(3);
+
+$scope.updataCard = function(){
+  //$scope.card_3.name='工商银行';  //视图不会发生变化
+  //$scope.card_3.$save()        //card_3没有$save方法
+};
+*/
+
+在这里其实也可以直接写:
+$scope.card_3.$$v.name='工商银行';
+$scope.card_3.$$v.$save();
+但是前提是要保证,在执行这段代码的时候,promise确实已经被解析了.在这个demo中,是已经解析了的.但是这个写法总是不好的.应该使用then函数,确保解析到$$v以后执行then回调.
+比如数据返回需要2000毫秒,但是我一开始就点击了按钮需要更新card_3.这时候就会报错.但是使用then不会报错,依然可以正确执行.
+
+*但是在guthub例子里,通过路由resolve解析到的recipe,它可以直接调用$save方法,因为解析后得到的recipe对象其实已经是$$v对象了.
+
+3.在$resource中,基本url里面的 :id 这类通过参数指定的值,如果没有传入参数,那么它提交的路径里就不会包含这一项,比如:
+return $resource('/card/user/:userID/:id',{userID:123,id:'@id'})
+当使用query方法时,是没有id值的,get请求的路径就是/card/user/123
+
+但是在node里面不是这样的:
+app.get('/card/user/123/:id',function(req,res){
+    //这个只能处理带有id值的get请求,没有id请求不能被匹配到处理
+});
+app.get('/card/user/123',function(req,res){
+    //这个用来处理没有id的get请求
+});
+
+app.post('/card/user/123/:id',function(req,res){
+    //这个只能处理带有id值的post请求,没有id请求不能被匹配到处理
+});
+app.post('/card/user/123',function(req,res){
+    //这个用来处理没有id的post请求
+});
+
+
+4.即使是RESTful架构,不表示就不可以在url中带有参数,带有参数不影响express对路径的匹配.获取路径参数的方法也就是使用url模块一样获取.
+无论POST请求还是GET请求,都可以带有参数,也都可以获取参数.
+
+5.url.parse(req.url,true),如果不带有true,不会把参数解析成json格式.
+
+6.ngResource第三个参数可以为资源添加自定义的方法(在笔记上再详解)
+
+7.ngResource中的资源自己拥有的方法,无论是自带的(如$save)还是自定义的(如$charge),调用该方法后,只要后台是返回了最新的资源,
+那么这个资源的视图就会被实时更新,不需要手动在回调函数中进行处理,如:
+$scope.updataCard = function(){
+  $scope.card_3.then(function(data){
+    data.name='工商银行';
+    data.$save()
+  });
+};
+
+$scope.addCharge = function(){
+  $scope.card_1.then(function(card){
+    card.$charge({amount:100});
+  })
+}
+在这里,修改card_3和给card_1充值这两件事,都没有在回调中重新渲染视图,但是由于后台已经对这个post请求返回了相应的card,所以视图会自动更新.
+也就是说,调用资源自带方法的对象在调用结束后,该对象的就会变为后台返回的对象.这也是ngResource的一个特性.
+
+
+
+
+
+
+

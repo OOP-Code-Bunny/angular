@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="accordionModule">
+<head>
+  <title>20.10 指令-accordion</title>
+  <meta charset="utf-8">
+  <link href="../bootstrap.css" rel="stylesheet">
+  <script src="../angular.min.js"></script>
+  <script type="text/ng-template" id="vertical.html">
+    <div class="btn-group-vertical" ng-transclude>
+    </div>
+  </script>
+  <script type="text/ng-template" id="text.html">
+    <div class="btn-group">
+      <button class="btn btn-default dropdown-toggle" type="button" ng-click="toggle()">{{title}}<span class="caret"></span></button>
+      <ul class="dropdown-menu" ng-show="ifShow" ng-transclude></ul>
+    </div>
+  </script>
+  <script src="script.js"></script>
+
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+    body{
+      padding:40px
+    }
+  </style>
+</head>
+<body>
+  <div ng-controller="accordionCtrl">
+    <accordion>
+      <expander ng-repeat="list in lists" my-title="{{list.title}}">
+        <li ng-repeat="content in list.contents">
+          <a href="">{{content}}</a>
+        </li>
+      </expander>
+    </accordion>
+  </div>
+</body>
+</html>
+
+
+
+
+
+

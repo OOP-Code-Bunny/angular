@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="AutoFocus">
+<head>
+  <title>16.1使用指令修改DOM</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script src="script.js"></script>
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+  </style>
+</head>
+<body>
+<div ng-controller="focus">
+  <button ng-click="nofocus()">没有焦点</button>
+  <br/>
+  <button myautofocus ng-click="hasfocus()">有焦点</button>
+  <br/>
+  <br/>
+  <span>{{text}}</span>
+</div>
+</body>
+</html>
+
+
+
+
+
+

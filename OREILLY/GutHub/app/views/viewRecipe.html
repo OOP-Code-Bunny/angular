@@ -1,0 +1,18 @@
+<!--展示单个菜-->
+<h3>{{recipe.title}}</h3>
+<h4>介绍</h4>
+<p>{{recipe.description}}</p>
+<h4>配方</h4>
+  <p ng-show="recipe.ingredients.length==0">暂无配方</p>
+  <ul ng-hide="recipe.ingredients.length==0">
+    <li ng-repeat="ingredient in recipe.ingredients">
+      {{ingredient.amount}}
+      {{ingredient.amountUnits}}
+      {{ingredient.ingredientName}}
+    </li>
+  </ul>
+<h4>做法</h4>
+<p>
+{{recipe.instructions}}
+</p>
+<a class="edit" href="#/edit/{{recipe.id}}">编辑</a>

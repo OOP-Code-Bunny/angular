@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>2.1模块</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script src="script.js"></script>
+</head>
+<body>
+  <div ng-app="otherApp">
+    <div ng-controller="TextController">
+      <h1>{{text.message}}</h1>
+      <h1>{{text.name}}</h1>
+    </div>
+  </div>
+</body>
+</html>
+
+<!--
+1.ng-app可以加在任何元素上,表示管理这个元素中的所有内容
+2.一个页面里只能有一个ng-app,不能有多个
+3.ng-app可以自定义一个名字,使用angular.module('myApp',[])来扩展一个新的模块
+4.然后再新扩展的模块里声明控制器
+myAppModule.controller('TextController',function($scope){
+  ...
+});
+5.js中,$scope里的变量,可以让它等于一个外部的变量,这样,同一个变量,可以在多个模块中被使用
+-->
+
+
+
+
+
+
+

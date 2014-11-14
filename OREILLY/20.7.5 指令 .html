@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="dirAppModule">
+<head>
+  <title>20.7(5)指令-scope</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script type="text/ng-template" id="text.html">
+    <div>
+      <h3 style="color:{{textColor}};background-color:{{bgColor}}" ng-transclude></h3>
+    </div>
+  </script>
+  <script src="script.js"></script>
+
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+    h3 {
+      color:#CB2027
+    }
+  </style>
+</head>
+<body>
+<div ng-controller="bgColor">
+  <input ng-model="bg_color" placeholder="请输入颜色值"/>
+  <input ng-model="text_color" placeholder="请输入颜色值"/>
+  <br/>
+  <cd-hello col-attr="{{bg_color}}" text-color="text_color" say-hello="sayHello()"><span>code_bunny</span></cd-hello>
+</div>
+</body>
+</html>
+
+
+
+
+
+

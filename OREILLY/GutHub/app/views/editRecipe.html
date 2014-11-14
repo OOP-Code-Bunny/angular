@@ -1,0 +1,50 @@
+<!--编辑单个菜-->
+<h3>编辑</h3>
+
+<form action="" name="recipeForm">
+  <div class="table_list cf">
+    <div class="left_title">
+      品名:
+    </div>
+    <div class="right_title">
+      <input type="text" name="recipeName" ng-model="recipe.title" focus required ng-maxlength="10"/>
+      <span class="tip" ng-show="recipeForm.recipeName.$error.maxlength">*输入长度不能超过10个字符</span>
+    </div>
+  </div>
+  <div class="table_list cf">
+    <div class="left_title">
+      介绍:
+    </div>
+    <div class="right_title">
+      <textarea name="" ng-model="recipe.description" required></textarea>
+    </div>
+  </div>
+  <div class="table_list cf">
+    <div class="left_title">
+      配方:
+    </div>
+    <div class="right_title" ng-controller="EditIngredients">
+      <ul>
+        <li class="cf" ng-repeat="ingredient in recipe.ingredients">
+          <input type="text" ng-model="ingredient.amount"/>
+          <input type="text" ng-model="ingredient.amountUnits"/>
+          <input type="text" ng-model="ingredient.ingredientName"/>
+          <span class="del" ng-click="deleted($index)">删除</span>
+        </li>
+      </ul>
+      <span class="add" ng-click="add()">添加</span>
+    </div>
+  </div>
+  <div class="table_list cf">
+    <div class="left_title">
+      做法:
+    </div>
+    <div class="right_title">
+      <textarea name="" ng-model="recipe.instructions" required></textarea>
+    </div>
+  </div>
+  <a class="edit save-{{recipeForm.$valid}}" ng-click="save(recipeForm.$invalid)">保存</a>
+  <!--这种写法为什么不对,还不知道-->
+  <!--<a class="edit" ng-click="save(recipeForm.$invalid)" ng-class="{disabled:recipeForm.$invalid}">保存</a>-->
+  <a class="edit" ng-click="del()">删除</a>
+</form>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="locationApp">
+<head>
+  <title>21.1 $location</title>
+  <meta charset="utf-8">
+  <script src="angular.min.js"></script>
+  <script src="script.js"></script>
+
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+    body{
+      padding:40px
+    }
+    span {
+      color:#589FCE
+    }
+  </style>
+</head>
+<body ng-controller="locationCtrl">
+  <p>完整url路径: <span>{{absurl}}</span></p>
+
+  <p>url路径(当前url#后面的内容,包括参数和哈希值): <span>{{url}}</span>
+    <button ng-click="changeUrl()">改变</button>
+  </p>
+
+  <p>相对路径(也就是当前url#后面的内容,不包括参数): <span>{{path}}</span>
+    <button ng-click="changePath()">改变</button>
+  </p>
+
+  <p>协议(比如http,https): <span>{{protocol}}</span></p>
+
+  <p>主机名: <span>{{host}}</span></p>
+
+  <p>端口号: <span>{{port}}</span></p>
+
+  <p>哈希值: <span>{{hash}}</span>
+    <button ng-click="changeHash()">改变</button>
+  </p>
+
+  <p>search值序列化json:
+    <span>{{search}}</span>
+    <button ng-click="changeSearch_1()">改变1</button>
+    <button ng-click="changeSearch_2()">改变2</button>
+    <button ng-click="changeSearch_3()">改变3</button>
+    <button ng-click="changeSearch_4()">改变4</button>
+    <button ng-click="changeSearch_5()">改变5</button>
+    <button ng-click="changeSearch_6()">改变6</button>
+  </p>
+</body>
+</html>
+
+
+
+
+
+

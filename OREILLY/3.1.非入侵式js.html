@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <title>3.1.非入侵式js</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script src="script.js"></script>
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+    span {
+      display:block; border:1px solid #ccc; background:#eee; line-height:14px; width:18px; text-align:center; margin:10px
+
+    }
+  </style>
+</head>
+<body>
+  <div class="navBar" ng-controller="NavController">
+    <span ng-click="doSome()">A</span>
+  </div>
+  <div class="content" ng-controller="ContentController">
+    <span ng-click="doSome()">B</span>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

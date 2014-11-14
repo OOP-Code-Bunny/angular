@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <title>2.3.2计算阶乘实例1</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script src="script.js"></script>
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+    input {
+      width:14px
+    }
+  </style>
+</head>
+<body>
+  <div ng-controller = 'Factorial'>
+    <form action="">
+      <input type="text" ng-model="factorial.number" ng-change="compute()"/>
+      的阶乘结果是:
+      <span>{{factorial.result}}</span>
+    </form>
+  </div>
+</body>
+</html>
+
+<!--
+结果中需要显示的值和input元素的ng-model属性绑定的值是需要通过某种运算的.
+所以input除了ng-model属性外,还需要ng-change属性,相当于给它的change事件绑定回调
+-->
+
+
+
+
+
+
+

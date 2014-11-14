@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <title>6.3css类和样式</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script src="script.js"></script>
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+    li {
+      height:30px; margin:5px 0; line-height:30px; list-style: none;
+    }
+    li.cur {
+      background:#C0DCC0
+    }
+    li span {
+      float:left; width:200px; margin-right:8px
+    }
+  </style>
+</head>
+<body>
+<div ng-controller = "Restaurant">
+  <ul>
+    <li ng-repeat="restaurant in restaurants" ng-class="{cur:$index==selRow}" ng-click="choose($index)">
+      <span>{{restaurant.name}}</span><span>{{restaurant.food}}</span><span>{{restaurant.price}}</span>
+    </li>
+  </ul>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

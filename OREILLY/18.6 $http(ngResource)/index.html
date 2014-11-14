@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app = 'HttpREST'>
+<head>
+  <title>18.6 $http(ngResource)</title>
+  <meta charset="utf-8">
+  <script src="angular.js"></script>
+  <script src="angular-resource.min.js"></script>
+  <script src="script.js"></script>
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+  </style>
+</head>
+<body>
+<div ng-controller = "Card">
+  <button ng-click="updataCard()">更新id为3的银行卡</button>
+  <br/>
+  <button ng-click="addCard4()">添加id为4的银行卡</button>
+  <br/>
+  <button ng-click="addCard()">添加一张不指定id的银行卡</button>
+  <br/>
+  <button ng-click="addCharge()">给建设银行的卡充值100元</button>
+  <br/>
+  <button ng-click="delCard1()">将id为1的银行卡删掉</button>
+  <br/>
+  <span>{{card_1['name']}}</span>
+  <span>{{card_1['amount']}}</span>
+  <br/>
+  <span>{{card_2['name']}}</span>
+  <span>{{card_2['amount']}}</span>
+  <br/>
+  <span>{{card_3['name']}}</span>
+  <span>{{card_3['amount']}}</span>
+  <br/>
+  <span>{{card_4['name']}}</span>
+  <span>{{card_4['amount']}}</span>
+  <br/>
+  <span>{{card_5['name']}}</span>
+  <span>{{card_5['amount']}}</span>
+  <br/>
+  <h3>list</h3>
+  <ul>
+    <li ng-repeat="card in cards">
+      {{card['name']}}
+      {{card['amount']}}
+    </li>
+  </ul>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

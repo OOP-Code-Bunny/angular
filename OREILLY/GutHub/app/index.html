@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="myRecipe">
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style/recipe.css"/>
+</head>
+<body>
+  <H3>code_bunny私房菜</H3>
+  <div class="left">
+    <ul>
+      <li><a ng-href="#/new">新建菜色</a></li>
+      <li><a ng-href="#/">菜单列表</a></li>
+    </ul>
+  </div>
+  <div class="right" ng-view>
+  </div>
+</body>
+<script src="scripts/common/angular.min.js"></script>
+<script src="scripts/common/angular-resource.min.js"></script>
+<script src="scripts/service.js"></script>
+<script src="scripts/directive.js"></script>
+<script src="scripts/controller.js"></script>
+</html>

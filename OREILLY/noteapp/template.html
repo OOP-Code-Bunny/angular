@@ -1,0 +1,18 @@
+<h3>待办事项:</h3>
+<div class="main">
+  <span ng-show="!editMode && !notes.length">暂无内容,请添加</span>
+  <ul class="list" ng-show="!editMode && notes.length">
+    <li ng-repeat="note in notes"><span>{{$index+1+'. '}}</span><b ng-click="editNote(note.id,$index)">{{note.title}}</b><span class="del" ng-click="delNote($index)">删除</span></li>
+  </ul>
+  <div class="edit" ng-show="editMode" contenteditable="true" ng-bind="curText"></div>
+</div>
+<div class="add" ng-show="!editMode" ng-click="editNote()">新增</div>
+<div class="save" ng-show="editMode" ng-click="saveNote()">保存</div>
+
+
+
+
+
+
+
+

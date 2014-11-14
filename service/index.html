@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="serviceApp">
+<head>
+  <title>服务</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <!--五种服务类型和装饰服务-->
+  <script src="script.js"></script>
+  <!--创建不同实例的服务-->
+  <!--<script src="script_2.js"></script>-->
+  <style type="text/css">
+    * {
+      font-family:'MICROSOFT YAHEI'
+    }
+  </style>
+</head>
+<body >
+
+  <div ng-controller="myCtrl">
+    name:{{name}}
+    <br/>
+    age:{{age}}
+    <br/>
+    love:{{love}}
+    <br/>
+    money:{{money}}
+    <br/>
+    id:{{id}}
+  </div>
+  <hr/>
+  <div ng-controller="myOtherCtrl">
+    name:{{name}}
+    <br/>
+    love:{{love}}
+    <br/>
+  </div>
+  <hr/>
+
+</body>
+</html>
+
+<!--constant和value一般返回一个json对象,里面可以有属性,也可以有方法,并且,方法和属性都可以在控制器中进行修改,也可以新增,删除.但是它们本身的设计模式,应该是constant的属性和值一般不去修改它,要修改的一般用value.
+最主要的区别是,constant是不能使用decorator进行装饰的.-->
+<!--constant和value所创建的服务,一般就是一组数据,注入到控制器中,也就是用于获取一些不变的数据.-->
+<!--它们都是'单例',不管被注入多少次,注入的都是同一个对象,一旦修改其中一个,所有的都被同步改变,也就是它是一个引用对象-->
+
+<!--factory就是最常用的创建服务的方法,它可以在函数里自己编写代码,最后返回一个对象,对象可以有它的方法和属性-->
+<!--
+        factory和constant和value的区别是,它第二个参数是一个函数,然后在函数里返回对象或者方法,或者直接一个值,所以说,它返回的方法,值,一般都是经过一些逻辑的处理的.将这个处理过程进行封装并返回,
+        这就是最常见的服务.比如从服务器端获取一组数据这样一个服务:在factory服务中,我们从服务器获取数据,最后返回.
+-->
+<!--
+        同样,factory服务所返回的对象也是可以修改的,并且也是个单例(引用对象),无论被注入多少次,其中一个修改,其余同步变化.
+-->
+
+<!--service所有的特点都和factory一模一样,唯一的不同是,service是一个构造函数,通过它创建的服务,是构造函数的实例-->
+<!--
+        通俗的说,service传入的构造函数,实例化以后的对象,应该是和factory的函数返回的对象一样的.如果是一个既有的构造函数,可以直接作为参数传入
+-->
+<!--
+        同样,service服务返回的对象也是可以修改的,并且也是个单例(引用对象),无论被注入多少次,其中一个修改,其余同步变化.
+-->
+
+<!--provider服务,返回一个对象,对象里面必须要有一个$get方法,而$get方法的内容就相当于factory服务的第二个参数这个函数-->
+<!--
+        provider服务和factory服务的区别在于,provider可以通过app.config(function(){})来配置服务的参数
+-->
+
+<!--使用实例化的服务,是不能使用装饰的.-->
+
+
+<!--
+        很重要的一点: 无论是以上哪一种服务,在其中一个控制器中修改一个服务,其余的服务也会被修改,但是,它并不会自己同步.
+        还有一点,控制器被实例化的过程不在乎代码里写的顺序,而在于它在页面里出现的顺序,比如myCtrl在前,那么,myCtrl这个控制器就会被先实例化,如果在其中修改了myConfig服务,那么在myCtrl后面出现的控制器,
+        里面的myConfig也就是修改过以后的myConfig了.
+        但如果是在页面的后面出现的控制器里修改myConfig,它是不会自动同步的,除非使用$watch
+-->
+
+
+
+
+
+

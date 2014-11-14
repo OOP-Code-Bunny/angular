@@ -1,0 +1,15 @@
+<table>
+  <tr><th>发件人</th><th>主题</th><th>发送时间</th></tr>
+  <tr ng-repeat="message in messages">
+    <td>{{message.sender}}</td><td><a href="#/view/{{message.id}}">{{message.subject}}</a></td><td>{{message.date}}</td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+

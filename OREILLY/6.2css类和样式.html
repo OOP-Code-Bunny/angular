@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <title>6.2css类和样式</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script src="script.js"></script>
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+    .tip {
+      margin:auto; width:300px; height:30px; line-height:30px; text-align:center;
+    }
+    .err {
+      color:#A91818; background:#F3976C
+    }
+    .warn {
+      color:#F3976C; background:#F6EBBC;
+    }
+    button {
+      border:1px solid #ccc; outline:0
+    }
+  </style>
+</head>
+<body>
+<div ng-controller = "WarnErr">
+  <div>
+    <div class="tip" ng-class="{err:ifErr,warn:ifWarn}" ng-show="ifShow">{{tipText}}</div>
+  </div>
+  <div>
+    <button ng-click="showErr()">error</button>
+    <button ng-click="showWarn()">warning</button>
+  </div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

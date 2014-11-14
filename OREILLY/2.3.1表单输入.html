@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <title>2.3.1input数据绑定</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script src="script.js"></script>
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+    span {
+      margin-left:8px; color:#ff9900
+    }
+  </style>
+</head>
+<body>
+  <div ng-controller = 'CheckStatus'>
+    <form action="">
+      <input type="checkbox" ng-model="checkRabbit"/>rabbit:<span>{{checkRabbit}}</span>
+      <br>
+      <input type="checkbox" ng-model="checkDog"/>dog:<span>{{checkDog}}</span>
+      <br>
+      <input type="checkbox" ng-model="checkCat"/>cat:<span>{{checkCat}}</span>
+    </form>
+  </div>
+</body>
+</html>
+
+<!--
+input元素的ng-model属性可以将input的值和变量的值进行绑定,
+如果是text类型的input,绑定的就是它的value,如果是checkbox,绑定的就是true或者false,
+对input的绑定是双向的,即变量的变化,也会引起选中与否的变化(或者是value的变化),比如这里设置的checkRabbit值是true,那么它就是选中的,其余两个值设置的是false,他们就是不选中的
+-->
+
+
+
+
+
+
+

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <title>2.3.4计算阶乘实例3</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script src="script.js"></script>
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+    input {
+      width:14px
+    }
+  </style>
+</head>
+<body>
+  <div ng-controller = 'Factorial'>
+    <form action="" ng-submit="compute()">
+      <input type="text" ng-model="factorial.number"/>
+      的阶乘结果是:
+      <span>{{factorial.result}}</span>
+      <br>
+      <button>计算</button>
+      <br>
+      <button ng-click="reset()">重置</button>
+    </form>
+  </div>
+</body>
+</html>
+
+<!--
+angular中给元素绑定事件的方法就是ng-事件名
+比如这里form的ng-submit, button的ng-click
+*其实两个button都是会触发form的提交事件的.
+*比较好的方法是把compute()写在计算button的ng-click里,这里仅作演示ng-submit
+-->
+
+
+
+
+
+
+

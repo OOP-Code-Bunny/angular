@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <title>5.1.隐藏和显示</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script src="script.js"></script>
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+    span {
+      margin-right:20px; width:200px;
+    }
+    .content {
+      width:200px; height:200px; background:#C0DCC0
+    }
+  </style>
+</head>
+<body>
+<div ng-controller="ShowHide">
+  <ul>
+    <button ng-click="toggleShow()">{{text}}</button>
+  </ul>
+  <div class="content" ng-show="ifShow"></div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

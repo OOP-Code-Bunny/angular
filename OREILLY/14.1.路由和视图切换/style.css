@@ -1,0 +1,33 @@
+*{
+    font-family:'MICROSOFT YAHEI';
+    font-size:12px;
+    color:#505966
+}
+h3 {
+    font-size:16px; color:#169FE7
+}
+table {
+    border-collapse: collapse;
+
+}
+table tr {
+    height:30px;
+}
+table tr td, table tr th {
+    border: 1px solid #eee; padding:0 20px
+}
+table tr td a {
+    color:#169FE7; text-decoration:none
+}
+p b {
+    width:60px; float:left; margin-right:10px
+}
+ul li {
+    list-style: none; float:left; margin-right:7px
+}
+.clear_float:after {
+    DISPLAY: block; CLEAR: both; CONTENT: ""; VISIBILITY: hidden; HEIGHT: 0
+}
+.button {
+    margin-top:20px; display:block; float:left; padding:4px; background:#F9FFE0; border:1px solid #C9C9C9; color:#91CE79; text-decoration:none
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="dirAppModule">
+<head>
+  <title>20.7(3)指令-scope</title>
+  <meta charset="utf-8">
+  <script src="../angular.min.js"></script>
+  <script type="text/ng-template" id="text.html">
+    <div>
+      <h3 ng-transclude></h3>
+    </div>
+  </script>
+  <script src="script.js"></script>
+
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+    h3 {
+      color:#CB2027
+    }
+  </style>
+</head>
+<body>
+  <div ng-controller="sayHelloCode">
+    <hello sayhello="sayHello(name)"><span>code_bunny</span></hello>
+  </div>
+</body>
+</html>
+
+
+
+
+
+

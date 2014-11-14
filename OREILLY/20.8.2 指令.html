@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="dirAppModule">
+<head>
+  <title>20.8.2 指令-link和compile</title>
+  <meta charset="utf-8">
+  <script src="../angular.min.js"></script>
+  <script type="text/ng-template" id="text.html">
+    <div>
+      <h3>
+        <level-three>
+          hello,{{name}}
+        </level-three>
+      </h3>
+    </div>
+  </script>
+  <script src="script.js"></script>
+
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+    h3 {
+      color:#CB2027
+    }
+  </style>
+</head>
+<body>
+  <div ng-controller="compileCtrl">
+    <level-one>
+      <level-two>
+      </level-two>
+    </level-one>
+  </div>
+</body>
+</html>
+
+
+
+
+
+

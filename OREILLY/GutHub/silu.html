@@ -1,0 +1,106 @@
+1. 服务
+        服务①: 创建Recipe服务,注入$resource
+        服务②: 创建RecipesLoad服务,注入Recipe服务,$q服务,用于获取所有的菜单
+        服务③: 创建RecipeLoad服务,注入Recipe服务,$route服务,用于获取路径中指定id的菜单
+
+2. 指令
+        指令①: focus指令,使某个元素可以获得焦点
+        指令②: sidebar指令,路由变化,页面还在加载时,显示loading层,加载完继续隐藏.
+              注入$rootScope,$rootScope可以通过$on绑定$routeChangeStart事件和$routeChangeSuccess事件
+
+3. 控制器
+        控制器是在通过路由创建的模型里写的
+        控制器①: List控制器,用于显示菜单列表,在作用域中定义菜单
+        控制器②: ListView控制器,用于控制某个菜单的界面,在作用域下要定义当前菜单,以及点击编辑后的回调,所以需要注入$location来控制url
+        控制器③: ListEdit控制器,用于编辑某个菜单的界面,在作用域下定义当前要编辑的菜单,然后和文本框中的值进行双向绑定,其中,'保存','删除',分别绑定回调,至于 配方 部分,是另外一个子控制器处理
+        控制器④  ListNew控制器,用于编辑一个新建的菜单,和控制器③的区别是,需要新建一个空的菜单对象,新菜单必须通过new Recipe来创建,这样它就是一个资源,有$save方法(这地方不是很明白,想试试看不用$save,而是使用Recipe.save方法来保存)
+        控制器⑤: IngredientsCtrl控制器,用于编辑配方,是ListEdit和ListNew的子控制器.因为会继承父控制器的作用域,因此配方的内容会随着父控制器的不同而不同.
+
+4. 路由
+        创建一个模型,把服务模型和指令模型都写入它的依赖.
+        创建'/'路由,显示菜单列表,使用List控制器,resolve得到菜单内容
+        创建'/view/:recipeID'路由,显示单个菜单内容,使用ListView控制器,resolve得到单个菜单内容
+        创建'/edit/:recipeID'路由,显示单个菜单编辑内容,使用ListEdit控制器,resolve得到单个菜单内容
+        创建'/new'路由,显示新创建的菜单编辑内容,使用ListNew控制器
+        创建'otherwise'路由,当路由不符合以上任何一条时,重定向到'/'
+
+5. 模板
+        ①index.html: 完整的html文件,包括了css,js,左侧导航,右侧部分使用ng-view来根据路由显示不同的模板
+         还需要包括一个loading的内容,在路由切换的时候显示
+        ②list.html: 用于显示所有菜单列表的模板
+        ③viewRecipe.html: 用于显示某个菜单的模板
+        ④editRecipe.html: 用于编辑(新建)某个菜单的模板
+
+
+
+实践中遇到的问题:
+        1. 如果没有写过某个依赖注入,那么,它不能被注入到函数中去,即使函数中根本没有使用它,记住,它的本质是注入,不是参数.
+        2. 创建一个angular.module的时候,即使没有任何依赖,也要写一个空的[]
+        3. 路由规则中的resolve是一个json对象,但是其中的某个属性值(比如说这个例子中的recipe),它的值不能直接写入,而是必须通过一个函数的返回值
+        如下:
+        resolve:{
+          recipes: function(){
+            return {
+              //对象的内容
+            }
+          }
+        }
+
+        不能是:
+        resolve:{
+          recipes: {
+            //对象的内容
+          }
+        }
+        4. 服务loadRecipe和loadRecipes必须是返回一个获取菜单的函数,而不是直接返回菜单,否则当路由改变的时候,它是不会重新去获取菜单的.
+        以下为例子:loadRecipe被注入的时候,被注入的不是外层的function(Recipe,$q,$route){...}这个函数,而是这个函数里面的返回值.
+        由于当路由改变的时候,需要再执行一遍Recipe.get用以获取对应的菜单,所以被注入的服务必须是一个函数
+
+        service.factory('loadRecipe',['Recipe','$q','$route',function(Recipe,$q,$route){
+          return function(){
+            var defer = $q.defer();
+            Recipe.get({id:$route.current.params.recipeId},function(recipe){
+              defer.resolve(recipe)
+            },function(err){
+              defer.reject(err)
+            });
+            return defer.promise
+          }
+        }]);
+
+        5. node中使用静态文件应该是 app.use(express.static(__dirname + '/app')); 而不是app.set(...)
+           在设置了这句话以后,node启动后会自动在/app/下寻找index文件并渲染
+
+        6. $route.current.params 和 $routeParams的区别:
+            http://www.cnblogs.com/liulangmao/p/3848540.html
+
+        7. 新建的菜单应该使用new Recipe({})来创建,这样它就是一个RESTful资源,可以被save
+
+        8. 保存新建的菜单后,需要跳转到新建的菜单的视图页,但是保存的时候,菜单还没有id属性,不能跳转,所以需要把跳转事件放到保存的回调里.
+           但是注意,如果要使用回调,那么node程序里必须使用res.send返回内容,如果不返回内容,即使回调里根本用不到返回内容,回调也不会被执行.
+           node程序为新建的菜单添加了id属性后,再把这个新菜单返回给save的回调,然后就可以跳转到相应id的菜单视图
+            Recipe.save($scope.recipe,function(recipe){
+                $location.path('/view/'+recipe.id)
+            });
+
+        9. $resource的请求类型和node里的路由必须是一致的:
+
+            'get':    {method:'GET'},
+            'save':   {method:'POST'},
+            'query':  {method:'GET', isArray:true},
+            'remove': {method:'DELETE'},
+            'delete': {method:'DELETE'}
+
+            因此,当使用delete方法的时候,node里对应的路由也要写delete方法
+            默认的方法只有post和get,所以要使用app.use(express.methodOverride())来添加delete方法,put方法...
+
+        10. 使用ng-class来为保存按钮添加禁用状态的时候,不能自动更新 (暂时无解)
+            http://segmentfault.com/q/1010000000612757
+
+
+
+
+
+
+
+

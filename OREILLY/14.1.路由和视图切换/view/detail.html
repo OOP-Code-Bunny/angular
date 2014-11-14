@@ -1,0 +1,18 @@
+<p><b>主题:</b><span>{{message.subject}}</span></p>
+<p><b>发件人:</b><span>{{message.sender}}</span></p>
+<p><b>发送时间:</b><span>{{message.date}}</span></p>
+<h4>To:</h4>
+<ul class="clear_float"><li ng-repeat="name in message.recipients">{{name}}; </li></ul>
+<hr>
+<div>{{message.content}}</div>
+<a class="button" href="#/">返回列表</a>
+
+
+
+
+
+
+
+
+
+

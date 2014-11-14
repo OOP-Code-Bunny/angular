@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="FormValidation" id="ng-app">
+<head>
+  <title>17.1表单验证</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script src="script.js"></script>
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+    h3 {
+      color:#CB2027
+    }
+  </style>
+</head>
+<body>
+<div>
+  <form name="signUp" ng-controller="myform">
+    <h1>注册:</h1>
+    <h3 ng-show="message">{{message}}</h3>
+    <span>昵称:</span><span><input type="text" ng-model="user.name" required/></span>
+    <br>
+    <span>邮箱:</span><span><input type="email" ng-model="user.email" required/></span>
+    <br>
+    <span>年龄:</span><span><input type="number" ng-model="user.age" required ng-maxlength="3" ng-minlength="1"/></span>
+    <br>
+    <button ng-disabled="!signUp.$valid" ng-click="addUser()">提交</button>
+  </form>
+</div>
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <title>7.1src和href</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script src="script.js"></script>
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+  </style>
+</head>
+<body>
+<div ng-controller = "SrcHref">
+  <img ng-src="./images/cats/{{favorite}}"/>
+  <a ng-href="./images/cats/{{favorite}}">查看</a>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

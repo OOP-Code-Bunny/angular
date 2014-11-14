@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+  <title>filter过滤器官方demo改</title>
+  <meta charset="utf-8">
+  <script src="../../angular.min.js"></script>
+  <style type="text/css">
+
+    * {
+      font-family:'MICROSOFT YAHEI'; color:#626262;
+    }
+    b {
+      font-weight:normal; color:#169FE7;
+    }
+
+  </style>
+</head>
+<body >
+  <div ng-controller="ctrl">
+    <p>搜索全部: <input type="text" ng-model="search.$"/></p>
+    <p>搜索姓名: <input type="text" ng-model="search.name"/></p>
+    <p>搜索电话: <input type="text" ng-model="search.phone"/></p>
+    <ul>
+      <li ng-repeat="friend in friends|filter:search:mode">
+        <span><b>name:</b>{{friend.name}}</span>
+        <br/>
+        <span><b>tel:</b>{{friend.phone}}</span>
+      </li>
+    </ul>
+  </div>
+</body>
+<script>
+  var app = angular.module('app',[]);
+  app.controller('ctrl',function($scope){
+    $scope.friends = [
+      {name:'John', phone:'555-1276'},
+      {name:'Mary', phone:'800-BIG-MARY'},
+      {name:'Mike', phone:'555-4321'},
+      {name:'Adam', phone:'555-5678'},
+      {name:'Julie', phone:'555-8765'},
+      {name:'Juliette', phone:'555-5678'}
+    ];
+    $scope.search = {$:'',name:'',phone:''};
+    $scope.mode = function(actual,expected){
+      if(actual===expected || expected==''){
+        return true
+      }
+      else {
+        return false
+      }
+    }
+  })
+</script>
+</html>
+
+
+http://www.ngnice.com/docs/api/ng/filter/filter
+这个例子有个bug,当使用严格模式匹配的时候,一开始没有输入Name only和Phone only的时候,search.name和search.phone是没有的,不是说{name:'',phone:''},而是{}就是空的,
+所以当只输入name项以后变为{name:'John'},这个时候可以匹配到name值为John的数据,然后我phone项后变为{name:'John',phone:'555-1276'},也是可以匹配到正确的数据的.
+但是,当我清空phone以后,它会变为{name:'John',phone:''},所以数据中就不再有能够匹配到的项了.所以,这个例子,一旦输入过某项再清空,就无法再正确使用严格模式来匹配数据了
+
+
+
+
+
+
+
+

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <title>10.1$scope数据控制</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script src="script.js"></script>
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+  </style>
+</head>
+<body>
+<div ng-controller = "ScopeData">
+  <span ng-click="number=number+3">点击改变值1</span>
+  <br>
+  <span ng-click="computeNum()">点击改变值2</span>
+  <br>
+  <span><input type="text" ng-model="number"/></span>
+  <p>{{number}}</p>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

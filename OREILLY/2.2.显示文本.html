@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <title>2.2显示文本</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script src="script.js"></script>
+</head>
+<body>
+  <div>
+    <div ng-controller="showText" >
+      <h1 ng-bind="text.message"></h1>
+      <h1>{{text.name}}</h1>
+    </div>
+  </div>
+</body>
+</html>
+
+<!--
+ng-bind属性来绑定数据和{{}}来绑定数据,效果一致,
+但是如果有大量的数据,在数据还没有加载完成之前,如果使用{{}},用户会看到{{}},而不是被替换掉的实际数据.所以初始化的数据可以使用ng-bind
+-->
+
+
+
+
+
+
+

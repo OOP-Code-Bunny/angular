@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <title>2.3.3计算阶乘实例2</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script src="script.js"></script>
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+    input {
+      width:14px
+    }
+  </style>
+</head>
+<body>
+  <div ng-controller = 'Factorial'>
+    <form action="">
+      <input type="text" ng-model="factorial.number"/>
+      的阶乘结果是:
+      <span>{{factorial.result}}</span>
+    </form>
+  </div>
+</body>
+</html>
+
+<!--
+不给input绑定change事件,因为factorial.number不一定是只和这个input绑定,也有可能和其它input绑定,也有可能后台数据发生了变化,
+因为,使用$watch方法,监测factorial.number的变化,只要factorial.number的值发生变化,就调用compute方法(详见js文件)
+$scope.$watch('factorial.number',$scope.compute)
+其中第一个参数是一个字符串,字符串内容是一个表达式,不需要再写$scope.factorial.number,但是第二个参数调用compute方法,必须要写$scope.compute
+原因暂时不详,后面会专门介绍到$watch以及表达式
+-->
+
+
+
+
+
+
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+  <title>11.1$watch监控数据变化</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script src="script.js"></script>
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+    .red {
+      color:#cc0000
+    }
+    TD {
+      font-size:12px; color:#999;
+    }
+    .green {
+      color:darkgreen;
+    }
+    .del {
+      text-decoration:line-through;
+    }
+  </style>
+</head>
+<body>
+<div ng-controller="CartController">
+  <h1>your shopping cart</h1>
+  <table>
+    <tr ng-repeat="item in items">
+      <td>{{item.title}}</td>
+      <td><input ng-model="item.quantity"/></td>
+      <td>{{item.price|currency}}</td>
+      <td class="red">{{item.price*item.quantity|currency}}</td>
+      <td><button ng-click="remove($index)">remove</button></td>
+    </tr>
+  </table>
+  <hr>
+  <table>
+    <tr>
+      <td>总价: <span class="del">{{bill.all|currency}}</span></td>
+    </tr>
+    <tr>
+      <td>折扣: <span class="red">{{bill.discount|currency}}</span></td>
+    </tr>
+    <tr>
+      <td>现价: <span class="green">{{bill.now|currency}}</span></td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

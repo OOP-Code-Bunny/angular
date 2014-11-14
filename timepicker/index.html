@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+  <title>AngularJS指令中创建controller与ngModel进行交互</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script src="jquery-1.10.2.min.js"></script>
+
+  <script type="text/javascript" src="jquery.timepicker.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="jquery.timepicker.css" />
+
+  <script type="text/javascript" src="bootstrap-datepicker.js"></script>
+  <link rel="stylesheet" type="text/css" href="bootstrap-datepicker.css" />
+
+  <script type="text/javascript" src="site.js"></script>
+  <link rel="stylesheet" type="text/css" href="site.css" />
+
+  <script src="script.js"></script>
+</head>
+<body>
+<div ng-controller="timePick">
+  <input type='text' class="time ui-timepicker-input" ng-model="timeOfDay" time-picker/>
+  <button ng-click="setTime()">set</button>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="expanderModule">
+<head>
+  <title>20.9 指令-expander</title>
+  <meta charset="utf-8">
+  <link href="../bootstrap.css" rel="stylesheet">
+  <script src="../angular.min.js"></script>
+  <script type="text/ng-template" id="text.html">
+    <div class="btn-group">
+      <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" ng-click="toggle()">
+        {{title}}<span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" ng-show="ifShow" ng-transclude>
+      </ul>
+    </div>
+
+  </script>
+  <script src="script.js"></script>
+
+  <style type="text/css">
+    body{
+      padding:40px
+    }
+  </style>
+</head>
+<body>
+  <div ng-controller="expanderCtrl">
+    <expander my-title="{{title}}">
+      <li ng-repeat="content in contents">
+        <a href="">{{content}}</a>
+      </li>
+    </expander>
+  </div>
+</body>
+</html>
+
+
+
+
+
+

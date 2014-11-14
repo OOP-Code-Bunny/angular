@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app = 'HttpREST'>
+<head>
+  <title>18.5 $http(RESTful)</title>
+  <meta charset="utf-8">
+  <script src="angular.js"></script>
+  <script src="script.js"></script>
+  <style type="text/css">
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px
+    }
+  </style>
+</head>
+<body>
+<div ng-controller = "Card">
+  <button ng-click="updataCard()">更新id为3的银行卡</button>
+  <br/>
+  <button ng-click="addCard()">添加一张新的银行卡</button>
+  <br/>
+  <button ng-click="delCard()">删除id为3的银行卡</button>
+  <br/>
+  <span>{{card_1}}</span>
+  <br/>
+  <span>{{card_2}}</span>
+  <br/>
+  <span>{{card_3}}</span>
+  <br/>
+  <span>{{card_4}}</span>
+  <br/>
+  <span>{{cards}}</span>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
