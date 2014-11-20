@@ -11,7 +11,7 @@
 <body>
 <div class="container">
   <table class="table table-bordered" ng-controller="ctrl">
-    <caption>通过ngSanitize模块的$sanitize服务解析html</caption>
+    <caption>通过ngSanitize服务解析html</caption>
     <thead>
     <tr>
       <th>使用的指令</th>
@@ -42,35 +42,6 @@
     </tbody>
   </table>
   <a class="btn btn-default" href="http://plnkr.co/edit/3FBasliZTRjKs3jwTpoR?p=preview" role="button">plunker</a>
-  <table class="table table-bordered" ng-controller="ctrlLinky">
-    <caption>通过ngSanitize模块的linky过滤器编译链接</caption>
-    <thead>
-    <tr>
-      <th>过滤方式</th>
-      <th>指令的写法</th>
-      <th>解析结果</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td>使用linky编译链接</td>
-      <td><pre>&lt;div ng-bind-html="myHtml | linky"&gt;<br>&lt;/div&gt;</pre></td>
-      <td><div ng-bind-html="myHtml | linky"></div></td>
-    </tr>
-    <tr>
-      <td>使用linky+target编译链接</td>
-      <td><pre>&lt;div ng-bind-html="myHtml | linky:'_blank'"&gt;<br>&lt;/div&gt;</pre></td>
-      <td><div ng-bind-html="myHtml | linky:'_blank'"></div></td>
-    </tr>
-    <tr>
-      <td>不编译链接</td>
-      <td><pre>&lt;div ng-bind-html="myHtml"&gt;<br>&lt;/div&gt;</pre></td>
-      <td><div ng-bind-html="myHtml"></div></td>
-    </tr>
-    </tbody>
-  </table>
-  <a class="btn btn-default" href="http://plnkr.co/edit/I9j13MnyuDwOJPnBiKE1?p=preview" role="button">plunker</a>
-
 </div>
 </body>
 </html>
