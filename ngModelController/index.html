@@ -3,7 +3,7 @@
 <head>
   <title>ngModelController</title>
   <meta charset="utf-8">
-  <script src="../angular.js"></script>
+  <script src="../angular-1.3.2.js"></script>
   <script src="script.js"></script>
   <link type="text/css" href="../bootstrap.css" rel="stylesheet" />
   <style>
@@ -17,13 +17,16 @@
   </div>
   <form role="form" name="myForm">
     <div class="form-group">
-      <div contenteditable name="myWidget" ng-model="userContent" class="form-control" required default-text="请输入内容"></div>
+      <div contenteditable name="myWidget" ng-model="userContent" ng-model-options="{debounce:1000}" class="form-control" required valid-characters default-text="请输入内容"></div>
     </div>
     <div class="form-group">
       <button type="button" class="btn btn-default btn-primary" ng-click="setNone()">设置为'抱歉,我没有想输入的内容'</button>
     </div>
     <div class="alert alert-danger" role="alert" ng-show="myForm.myWidget.$error.required">
       <strong>Oh!</strong> 必填!
+    </div>
+    <div class="alert alert-danger" role="alert" ng-show="myForm.myWidget.$error.validCharacters">
+      <strong>Oh!</strong> 不符合自定义的验证规则!
     </div>
   </form>
   <div class="panel panel-primary">
@@ -35,18 +38,27 @@
     </div>
   </div>
 </div>
-<div class="container" ng-ctrl="cancel">
-  <form name="myForm" ng-model-options="{ updateOn: 'blur' }">
-    <p>With $cancelUpdate()</p>
-    <input name="myInput1" ng-model="myValue" ng-keydown="resetWithCancel($event)"><br/>
-    myValue: "{{ myValue }}"
 
-    <p>Without $cancelUpdate()</p>
-    <input name="myInput2" ng-model="myValue" ng-keydown="resetWithoutCancel($event)"><br/>
-    myValue: "{{ myValue }}"
+<div class="container" ng-controller="Rollback">
+  <form role="form" name="myForm2" ng-model-options="{ updateOn: 'blur' }">
+    <div class="form-group">
+      <label>执行了 $rollbackViewValue() 方法</label>
+      <input name="myInput1" ng-model="myValue1" class="form-control" ng-keydown="resetWithRollback($event)">
+      <blockquote>
+        <footer>myValue1: "{{ myValue1 }}"</footer>
+      </blockquote>
+      <p></p>
+    </div>
+    <div class="form-group">
+      <label>没有执行了 $rollbackViewValue() 方法</label>
+      <input name="myInput2" ng-model="myValue2" class="form-control" ng-keydown="resetWithoutRollback($event)">
+      <blockquote>
+        <footer>myValue2: "{{ myValue2 }}"</footer>
+      </blockquote>
+    </div>
   </form>
 </div>
 
-
 </body>
 </html>
+
