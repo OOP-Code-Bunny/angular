@@ -32,10 +32,6 @@ app.directive('contenteditable',function(){
                 console.log(ngModel.$viewValue);
                 console.log(ngModel.$modelValue);
             });
-            ngModel.$validators.validCharacters = function(modelValue, viewValue) {
-                var value = modelValue || viewValue;
-                return /[0-9]+/.test(value);
-            };
         }
     }
 });
