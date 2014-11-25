@@ -29,9 +29,12 @@ app.directive('contenteditable',function(){
             });
             element.bind('focus blur keyup change',function(){
                 ngModel.$setViewValue(element.html());
-                console.log(ngModel.$viewValue);
-                console.log(ngModel.$modelValue);
+                console.log('$viewValue为:'+ngModel.$viewValue);
+                console.log('$modelValue为:'+ngModel.$modelValue);
             });
+            ngModel.$parsers.push(function(value){
+                return value.toUpperCase()
+            })
         }
     }
 });
