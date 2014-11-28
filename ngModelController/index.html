@@ -17,7 +17,7 @@
   </div>
   <form role="form" name="myForm">
     <div class="form-group">
-      <div contenteditable name="myWidget" ng-model="userContent" ng-model-options="{debounce:1000}" class="form-control" required valid-characters default-text="请输入内容"></div>
+      <div contenteditable name="myWidget" ng-model="userContent" ng-model-options="{debounce:1000}" class="form-control" required default-text="请输入内容"></div>
     </div>
     <div class="form-group">
       <button type="button" class="btn btn-default btn-primary" ng-click="setNone()">设置为'抱歉,我没有想输入的内容'</button>
@@ -55,6 +55,11 @@
     </div>
   </form>
 </div>
+
+<div class="container">
+  <a href="http://plnkr.co/edit/CbOS1nFosPDfQXvsGTyR?p=preview" class="btn btn-default" role="button">在线预览</a>
+</div>
+
 
 </body>
 </html>

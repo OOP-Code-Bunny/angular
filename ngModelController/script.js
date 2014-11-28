@@ -15,12 +15,11 @@ app.directive('contenteditable',function(){
             }
             //一开始scope.userContent是空
             console.log(ngModel.$isEmpty(scope.userContent));
-            element.html(attrs.defaultText);
             ngModel.$setViewValue(attrs.defaultText);
             //调用了$setViewValue以后就不为空了,但是如果设置了ngModelOptions,则没用.
             console.log(ngModel.$isEmpty(scope.userContent));
             ngModel.$render = function(){
-                element.html(ngModel.$viewValue || attrs.defaultText)
+                element.html(ngModel.$viewValue || attrs.defaultText);
             };
             element.bind('focus',function(){
                 if(element.html()==attrs.defaultText){
@@ -28,6 +27,7 @@ app.directive('contenteditable',function(){
                 }
             });
             element.bind('focus blur keyup change',function(){
+                console.log(scope.userContent);    //userContent这个实际的值应该是和$modelValue一致的.
                 ngModel.$setViewValue(element.html());
                 console.log('$viewValue为:'+ngModel.$viewValue);
                 console.log('$modelValue为:'+ngModel.$modelValue);
@@ -38,11 +38,6 @@ app.directive('contenteditable',function(){
         }
     }
 });
-
-/*
- 调用$setViewValue并不会触发$render,但是userContent会被同步.
- 当直接修改了userContent这个值,则$render会被调用
-*/
 
 
 /*app.controller('Rollback',function($scope){
