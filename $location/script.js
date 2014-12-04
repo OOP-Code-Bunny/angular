@@ -1,6 +1,12 @@
 /*21.1 $location*/
 var locationApp = angular.module('locationApp',[]);
+locationApp.config(function($locationProvider){
+    $locationProvider.html5Mode(true).hashPrefix('!');
+});
 locationApp.controller('locationCtrl',function($scope,$location,$timeout,$rootScope){
+    $scope.location=function(newLocation){
+        return $location.url(newLocation);
+    };
     $scope.absurl = $location.absUrl();
     $scope.url = $location.url();
     $scope.path = $location.path();
