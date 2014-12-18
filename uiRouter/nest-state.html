@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html ng-app="myApp">
+<html ng-app="nest">
 <head>
-  <title>uiRouter-状态管理</title>
+  <title>uiRouter-状态嵌套</title>
   <meta charset="utf-8">
   <!--<base href="/uiRouter/">-->
   <base href="/">
@@ -25,13 +25,12 @@
 <body>
 
 <div>
-  <a href="contacts/bunny">查看视图</a>
-  <a href="contacts/exit">离开</a>
-  <a ui-sref="lalala({a:1,b:2})">无</a>
-  <section ui-view loading>点击链接后内容会被加载在这里</section>
+  <a href="contacts">查看视图</a>
+  <a href="contacts/list">查看嵌套视图1</a>
+  <!--<a href="contacts/detail">查看嵌套视图2</a>-->
+  <ui-view>点击链接后内容会被加载在这里</ui-view>
 </div>
 
-下一篇:<a href="nest-state.html" target="blank">嵌套状态</a>
-
+下一篇:<a href="named-views.html" target="blank">多个命名视图</a>
 </body>
 </html>

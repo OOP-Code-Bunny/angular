@@ -264,3 +264,189 @@ myapp.directive('loading',function($rootScope){
 5.触发$viewContentLoaded事件
 6.触发$stateChangeSuccess事件.
 */
+
+
+var nest = angular.module('nest',['ui.router']);
+/*使用.state()来定义父子状态*/
+/*nest.config(function($locationProvider,$stateProvider){
+    $locationProvider.html5Mode({enabled:true}).hashPrefix('!');
+    $stateProvider.state('contacts',{
+        url:'/contacts',
+        templateUrl:'contacts.html'
+    }).state('contacts.list',{
+        url:'/list',
+        templateUrl:'contacts.list.html'
+    })
+});*/
+
+/*指定parent属性来定义父子状态*/
+/*nest.config(function($locationProvider,$stateProvider){
+    $locationProvider.html5Mode({enabled:true}).hashPrefix('!');
+    $stateProvider.state('contacts',{
+        url:'/contacts',
+        templateUrl:'contacts.html'
+    }).state('list',{
+        url:'/list',
+        templateUrl:'contacts.list.html',
+        parent:'contacts'
+    })
+});*/
+
+/*指定parent属性为状态对象来定义父子状态*/
+/*var contacts = {
+    name:'parent',
+    url:'/contacts',
+    templateUrl:'contacts.html',
+    controller:function($scope){
+        $scope.contacts = [{id:0,name:'code_bunny'},{id:1,name:'white_bunny'},{id:2,name:'black_bunny'}]
+    }
+};
+var list = {
+    name:'parent.child',
+    url:'/list',
+    templateUrl:'contacts.list.html',
+    parent:contacts
+};
+nest.config(function($locationProvider,$stateProvider){
+    $locationProvider.html5Mode({enabled:true}).hashPrefix('!');
+    $stateProvider.state(contacts).state(list);
+});*/
+
+/*resolve依赖的继承*/
+/*var contacts = {
+    name:'parent',
+    url:'/contacts',
+    templateUrl:'contacts.html',
+    resolve:{
+        resA:function(){
+            return {value:'A'}
+        }
+    },
+    controller:function($scope,resA){
+        $scope.a = resA.value;
+    }
+};
+var list = {
+    name:'parent.child',
+    url:'/list',
+    templateUrl:'contacts.list.html',
+    parent:contacts,
+    resolve:{
+        resB:function(resA){
+            return {value:resA.value+'B'}
+        }
+    },
+    controller:function($scope,resB){
+        $scope.b = resB.value
+    }
+};
+nest.config(function($locationProvider,$stateProvider){
+    $locationProvider.html5Mode({enabled:true}).hashPrefix('!');
+    $stateProvider.state(contacts).state(list);
+});*/
+
+/*data数据的继承*/
+/*var contacts = {
+    name:'parent',
+    url:'/contacts',
+    templateUrl:'contacts.html',
+    data:{
+        dataA:'a',
+        dataB:'b'
+    },
+    controller:function($scope,$state){
+        $scope.a = $state.current.data.dataA;
+    }
+};
+var list = {
+    name:'parent.child',
+    url:'/list',
+    templateUrl:'contacts.list.html',
+    parent:contacts,
+    controller:function($scope,$state){
+        $scope.a = $state.current.data.dataA;
+        $scope.b = $state.current.data.dataB;
+    }
+};
+nest.config(function($locationProvider,$stateProvider){
+    $locationProvider.html5Mode({enabled:true}).hashPrefix('!');
+    $stateProvider.state(contacts).state(list);
+});*/
+
+/*抽象状态-给子状态们提供基础url*/
+/*var contacts = {
+    abstract:true,
+    name:'parent',
+    url:'/contacts',
+    template:'<ui-view/>'
+};
+var list = {
+    name:'parent.child',
+    url:'/list',
+    templateUrl:'contacts.list.html',
+    parent:contacts
+};
+var detail = {
+    name:'parent.detail',
+    url:'/detail',
+    templateUrl:'contacts.detail.html',
+    parent:contacts
+};
+nest.config(function($locationProvider,$stateProvider){
+    $locationProvider.html5Mode({enabled:true}).hashPrefix('!');
+    $stateProvider.state(contacts).state(list).state(detail);
+});*/
+
+/*抽象状态-给子状态们提供ui-view元素*/
+/*var contacts = {
+    abstract:true,
+    name:'parent',
+    url:'/contacts',
+    templateUrl:'contacts.html'
+};
+var list = {
+    name:'parent.child',
+    url:'/list',
+    templateUrl:'contacts.list.html',
+    parent:contacts
+};
+var detail = {
+    name:'parent.detail',
+    url:'/detail',
+    templateUrl:'contacts.detail.html',
+    parent:contacts
+};
+nest.config(function($locationProvider,$stateProvider){
+    $locationProvider.html5Mode({enabled:true}).hashPrefix('!');
+    $stateProvider.state(contacts).state(list).state(detail);
+});*/
+
+/*抽象状态-混合例子*/
+var contacts = {
+    abstract:true,
+    name:'parent',
+    url:'/contacts',
+    templateUrl:'contacts.html',
+    controller:function($scope){
+        $scope.contacts = [{id:0,name:'code_bunny'},{id:1,name:'white_bunny'},{id:2,name:'black_bunny'}]
+    }
+};
+var list = {
+    name:'parent.child',
+    url:'/list',
+    templateUrl:'contacts.list.html',
+    parent:contacts
+};
+var detail = {
+    name:'parent.detail',
+    url:'/detail/:id',
+    templateUrl:'contacts.detail.html',
+    parent:contacts,
+    controller:function($scope,$stateParams){
+        $scope.id = $stateParams.id
+    }
+};
+nest.config(function($locationProvider,$stateProvider){
+    $locationProvider.html5Mode({enabled:true}).hashPrefix('!');
+    $stateProvider.state(contacts).state(list).state(detail);
+});
