@@ -1,3 +1,4 @@
+/*********************************************状态管理*********************************************/
 var myapp = angular.module('myApp',['ui.router']);
 
 /*使用templateUrl,并且使用$stateParams*/
@@ -266,7 +267,8 @@ myapp.directive('loading',function($rootScope){
 */
 
 
-var nest = angular.module('nest',['ui.router']);
+/*********************************************嵌套状态*********************************************/
+//var nest = angular.module('nest',['ui.router']);
 /*使用.state()来定义父子状态*/
 /*nest.config(function($locationProvider,$stateProvider){
     $locationProvider.html5Mode({enabled:true}).hashPrefix('!');
@@ -422,7 +424,7 @@ nest.config(function($locationProvider,$stateProvider){
 });*/
 
 /*抽象状态-混合例子*/
-var contacts = {
+/*var contacts = {
     abstract:true,
     name:'parent',
     url:'/contacts',
@@ -449,4 +451,93 @@ var detail = {
 nest.config(function($locationProvider,$stateProvider){
     $locationProvider.html5Mode({enabled:true}).hashPrefix('!');
     $stateProvider.state(contacts).state(list).state(detail);
+});*/
+
+
+/*********************************************多个命名的视图*********************************************/
+var named = angular.module('namedView',['ui.router']);
+
+/*var report = {
+    name:'report',
+    url:'/report',
+    views:{
+        'filters':{
+            templateUrl:'report-filters.html',
+            controller:function($scope){
+                $scope.title="我是filters的内容"
+            }
+        },
+        'tabledata':{
+            templateUrl:'report-table.html',
+            controller:function($scope){
+                $scope.title="我是table的内容"
+            }
+        },
+        'graph':{
+            templateUrl:'report-graph.html',
+            controller:function($scope){
+                $scope.title="我是graph的内容"
+            }
+        }
+    }
+};
+
+named.config(function($locationProvider,$stateProvider){
+    $locationProvider.html5Mode({enabled:true}).hashPrefix('!');
+    $stateProvider.state(report)
+});*/
+
+var report = {
+    name:'report',
+    url:'/report',
+    templateUrl:'report.html'
+};
+var detail = {
+    name:'report.detail',
+    url:'/detail',
+    parent:'report',
+    views:{
+        //绝对名字:在父状态的template(也就是report.html)里寻找对应名字为'aaa'的ui-view元素
+        'aaa':{
+            templateUrl:'aaa.html'
+        },
+        //绝对名字:在父状态的template(也就是report.html)里寻找没有名字的ui-view元素
+        '':{
+            templateUrl:'report.detail.html'
+        },
+/*        'aaa@report':{
+            templateUrl:'aaa.html'
+        },
+        '@report':{
+            templateUrl:'report.detail.html'
+        },*/
+        //相对名字:在report.detail状态里寻找对应名字为'bbb'的ui-view元素
+        'bbb@report.detail':{
+            templateUrl:'bbb.html'
+        },
+        //相对名字:在report.detail状态里寻找对应没有名字的ui-view元素
+        '@report.detail':{
+            templateUrl:'no-name.html'
+        },
+        //相对名字:在report状态里寻找对应名字为'bbb'的ui-view元素
+        'bbb@report':{
+            templateUrl:'bbb2.html'
+        },
+        //相对名字:在根状态(named-views.html)里寻找对应名字为'aaa'的ui-view元素
+        'aaa@':{
+            templateUrl:'aaa2.html'
+        },
+        //相对名字:在根状态(named-views.html)里寻找没有名字的ui-view元素.
+        //需要特别注意:这里等于是在子状态里定义了父状态的里ui-view,要这样写的话,最开始的两段绝对名字'aaa'和'',就必须改成下面注释的两段相对名字'aaa@report'和'bbb@report'.
+        //否则会造成错误.
+/*        '@':{
+            templateUrl:'report.html'
+        }*/
+    }
+};
+
+named.config(function($locationProvider,$stateProvider){
+    $locationProvider.html5Mode({enabled:true}).hashPrefix('!');
+    $stateProvider.state(report).state(detail)
 });
+
