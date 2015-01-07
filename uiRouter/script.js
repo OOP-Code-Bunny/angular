@@ -186,10 +186,12 @@ myapp.config(function($locationProvider,$stateProvider){
     $stateProvider.state('contacts',{
         url:'/contacts/:name',
         templateUrl:function($stateParams){
-            return 'partials/contacts.'+$stateParams.name+'.html'
+            return 'partials/contacts.'+$stateParams.name+'.html';
+
         },
         resolve:{
-            title:function(){
+            title:function($stateParams){
+                console.log($stateParams);
                 return 'contacts'
             }
             /*错误的resolve会触发$stateChangeError*/
@@ -487,6 +489,7 @@ named.config(function($locationProvider,$stateProvider){
     $stateProvider.state(report)
 });*/
 
+/*
 var report = {
     name:'report',
     url:'/report',
@@ -505,12 +508,12 @@ var detail = {
         '':{
             templateUrl:'report.detail.html'
         },
-/*        'aaa@report':{
-            templateUrl:'aaa.html'
-        },
-        '@report':{
-            templateUrl:'report.detail.html'
-        },*/
+//        'aaa@report':{
+//            templateUrl:'aaa.html'
+//        },
+//        '@report':{
+//            templateUrl:'report.detail.html'
+//        },
         //相对名字:在report.detail状态里寻找对应名字为'bbb'的ui-view元素
         'bbb@report.detail':{
             templateUrl:'bbb.html'
@@ -530,14 +533,140 @@ var detail = {
         //相对名字:在根状态(named-views.html)里寻找没有名字的ui-view元素.
         //需要特别注意:这里等于是在子状态里定义了父状态的里ui-view,要这样写的话,最开始的两段绝对名字'aaa'和'',就必须改成下面注释的两段相对名字'aaa@report'和'bbb@report'.
         //否则会造成错误.
-/*        '@':{
-            templateUrl:'report.html'
-        }*/
+//        '@':{
+//            templateUrl:'report.html'
+//        }
     }
 };
+*/
+
 
 named.config(function($locationProvider,$stateProvider){
     $locationProvider.html5Mode({enabled:true}).hashPrefix('!');
     $stateProvider.state(report).state(detail)
 });
 
+var urlRouting = angular.module('urlRouting',['ui.router']);
+var hello = {
+    name:'hello',
+    /*注意,只能匹配到'/hello/',最后一个/不能少,最后一个/后面也不能再有其他内容*/
+    url:'/hello/',
+    template:'<h3>/hello/</h3>'
+};
+var user = {
+    name:'user',
+    /*注意,可以匹配到/user/,也就是说,参数为空也能被匹配到,使用花括号和使用:和使用正则完全一致*/
+    /*url:'/user/:id',*/
+    /*url:'/user/{id}',*/
+    /*使用了:int,user/后面必须是一个整数,否则不匹配*/
+    /*url:'/user/{id:int}',*/
+    /*相当于{id}*/
+    /*url:'/user/{id:[^/]*}',*/
+    /*id的长度在1-8位之间*/
+    /*url:'/user/{id:[0-9a-fA-F]{1,8}}',*/
+    templateProvider: function($stateParams){
+        return '<h1>user/'+$stateParams.id+'</h1>'
+    }
+};
+/*var contacts = {
+    name:'contacts',
+    *//*匹配0-9数字,长度在1-8之间*//*
+    *//*url:'/contacts/{contactId:[0-9]{1,8}}',*//*
+    *//*在上面的基础上,必须要有myParam参数*//*
+    *//*url:'/contacts/{contactId:[0-9]{1,8}}?myParam',*//*
+    *//*在上面的基础上,必须要有myParam和myName两个参数*//*
+    url:'/contacts/{contactId:[0-9]{1,8}}?myParam&myName',
+    templateProvider:function($stateParams){
+        return '<h1>contacts/'+$stateParams.contactId+$stateParams.myParam+$stateParams.myName+'</h1>'
+    }
+};*/
+
+/************************作为父状态************************/
+var contacts = {
+    name:'contacts',
+    url:'/contacts',
+    template:'<div ui-view></div>'
+};
+
+var list = {
+    name:'contacts.list',
+    /*url:'/list/{contactId:[0-9]{1,8}}?myParam',*/
+    /*在子路由的url前加'^',则子路由是一个单独的路由,不再和父路由进行拼合*/
+    url:'^/list/{contactId:[0-9]{1,8}}?myParam',
+    parent:'contacts',
+    templateProvider:function($stateParams){
+        return '<h1>contacts/'+$stateParams.contactId+$stateParams.myParam+$stateParams.myName+'</h1>'
+    }
+};
+
+var files = {
+    name:'files',
+    /*匹配/files/开头的所有url,后面有多少个'/'都可以,'/'部分也会被作为path这个整体*/
+    /*url:'/files/{path:.*}',*/
+    /*同上,获取包括'/'的全部作为参数的一种简写*/
+    url:'/files/*path',
+    templateProvider:function($stateParams){
+        return '<h1>files/'+$stateParams.path+'</h1>'
+    }
+};
+
+var users = {
+    name:'users',
+    url:'/users/:id/details/{type}/{repeat:[0-9]+}?from&to',
+    resolve:{
+        userId: function($stateParams){
+            console.log($stateParams.id);
+            return $stateParams.id
+        }
+    },
+    templateProvider:function($stateParams){
+        console.log($stateParams);
+        return '<h1>'+$stateParams.type+' '+$stateParams.repeat+' '+$stateParams.from+' '+$stateParams.to+'</h1>'
+    },
+    controller:function(userId){
+        //console.log('userId='+userId)
+    }
+
+};
+
+urlRouting.config(function($locationProvider,$stateProvider,$urlRouterProvider,$urlMatcherFactoryProvider){
+    $locationProvider.html5Mode({enabled:true}).hashPrefix('!');
+    $stateProvider.state(hello).state(user).state(contacts).state(files).state(list).state(users);
+    /*当导航到'/'的时候,重定向到'hello'*/
+    $urlRouterProvider.when('/','hello/');
+    /*没有匹配到任何状态或者.when()重定向时,重定向到'users/123/details//0'*/
+    //$urlRouterProvider.otherwise('users/123/details//0');
+    $urlRouterProvider.rule(function($injector,$location){
+        var path = $location.path(),normalized = path.toLowerCase();
+        if(path!==normalized){
+            return normalized
+        }
+
+    });
+    var urlMatcher = $urlMatcherFactoryProvider.compile('/home/:id?param1');
+    $stateProvider.state('mystate',{
+        url:urlMatcher,
+        templateProvider:function($stateParams){
+            return '<h1>mystate'+ $stateParams.id +'</h1>'
+        }
+    });
+    /*注意如果一个urlMatcher既匹配了状态里的url,又匹配了.when,以状态为准,不会重定向*/
+    $urlRouterProvider.when(urlMatcher,'hello/');
+});
+
+
+
+Array.prototype.dr = function(){
+    var that = this;
+    for(var i=0;i<that.length;i++){
+        if(that[i] instanceof Array){
+            that = that.slice(0,i).concat(that[i],that.slice(i+1));
+            i--
+        }
+    }
+    return that
+};
+
+var arr = [[['a','b'],1,2,3],4,[5,6,7],8];
+
+console.log(arr.dr());

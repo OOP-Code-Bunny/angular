@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html ng-app="urlRouting">
+<head>
+  <title>url-路由</title>
+  <meta charset="utf-8">
+  <!--<base href="/uiRouter/">-->
+  <base href="/">
+  <script src="angular-1.3.2.js"></script>
+  <script src="angular-ui-router.min.js"></script>
+  <script src="script.js"></script>
+  <style>
+    *{
+      font-family:'MICROSOFT YAHEI';
+      font-size:12px;
+      color:#ccc;
+      font-weight:normal
+    }
+    a {
+      color:#169FE7;
+    }
+    span {
+      color:#626262;
+    }
+    h1 {
+      font-size:18px; color:#626262;
+    }
+    h2 {
+      font-size:16px; text-indent:30px; color:#999999;
+    }
+    h3 {
+      text-indent:60px; font-size:14px; color:#aaa
+    }
+    h4 {
+      text-indent:90px;
+    }
+    h5 {
+      text-indent:120px
+    }
+  </style>
+</head>
+<body>
+
+<div>
+  <p>
+    hello/路由:<a href="hello/">'hello/'</a>
+  </p>
+
+  <p>
+    hello/1路由: 匹配'/hello/'无效 <a href="hello/1">'hello/1 无效'</a>
+  </p>
+
+  <p>
+    hello路由: 匹配'/hello/'无效 <a href="hello">'hello 无效'</a>
+  </p>
+
+  <p>
+    user/1路由: 匹配'user/{id}'或'user/:id' <a href="user/1">'user/:id'</a>
+  </p>
+
+  <p>
+    user/1/路由: 匹配'user/:id'无效 <a href="user/1/">'user/:id/ 无效'</a>
+  </p>
+
+  <p>
+    user/路由: <a href="user/">'user/'</a>
+  </p>
+
+  <p>
+    user/anotheruser路由: 匹配'user/{id:int}'无效 <a href="user/anotheruser">'user/{id:int} 下无效'</a>
+  </p>
+
+  <p>
+    contacts/0123456789路由: 匹配'contacts/{contactId:[0-9]{1-8}}'无效
+    <a href="contacts/0123456789">'contacts/{contactId:[0-9]{1-8}}'</a>
+  </p>
+
+  <p>
+    contacts/0123路由:
+    <a href="contacts/0123">'/contacts/{contactId:[0-9]{1-8}}?myParam'</a>
+  </p>
+
+  <p>
+    contacts/0123?myParam路由:
+    <a href="contacts/0123?myParam">'/contacts/{contactId:[0-9]{1-8}}?myParam'</a>
+  </p>
+
+  <p>
+    contacts/0123?myParam=param&myName=name路由: <a href="contacts/0123?myParam=param&myName=name">'/contacts/{contactId:[0-9]{1-8}}?myParam&myName'</a>
+  </p>
+
+  <p>
+    contacts/list/0123?myParam路由: '/contacts'路由的子路由'/list': <a href="contacts/list/0123?myParam">'/contacts/list'</a>
+  </p>
+
+  <p>
+    list/0123?myParam路由: '/contacts'路由的子路由'^/list'<a href="list/0123?myParam">'/list'</a>
+  </p>
+
+  <p>
+    files/paths/path路由: files后面整体作为一个参数<a href="files/paths/path">'/files/*path'</a>
+  </p>
+
+  <p>
+    users/123/detail//0路由: <a href="users/123/details//0">'/users/:id/details/{type}/{repeat:[0-9]+}?from&to'</a>
+  </p>
+
+  <p>
+    users/123/detail/default/0?from=there&to=here路由: <a href="users/456/details/default/0?from=there&to=here">'/users/:id/details/{type}/{repeat:[0-9]+}?from&to'</a>
+  </p>
+
+  <p>
+    空 <a href="/">''</a>
+  </p>
+
+  <p>
+    HELLO/ <a href="HELLO/">'HELLO/'</a>
+  </p>
+
+  <p>
+    home/1?param1=2 <a href="home/1?param1=2">'/home/:id?param1'</a>
+  </p>
+
+
+  <div ui-view></div>
+</div>
+
+下一篇:<a href="component.html" target="blank">组件</a>
+</body>
+</html>
