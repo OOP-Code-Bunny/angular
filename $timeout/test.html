@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="timeoutApp">
+<head>
+    <title>$timeout服务</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../bootstrap.css"/>
+    <script src="../angular.js"></script>
+</head>
+<body >
+
+  <script>
+      var timeoutApp = angular.module('timeoutApp',[]);
+      timeoutApp.run(function($timeout){
+          var a = $timeout(function(){
+              console.log('执行$timeout回调');
+              return 'angular'
+          },1000);
+          a.then(function(data){
+              console.log(data)
+          },function(data){
+              console.log(data)
+          });
+          $timeout.cancel(a);
+      })
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+

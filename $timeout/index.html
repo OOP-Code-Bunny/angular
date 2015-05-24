@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="timeoutApp">
+<head>
+    <title>$timeout服务</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../bootstrap.css"/>
+    <script src="../angular.js"></script>
+    <script src="script.js"></script>
+    <style type="text/css">
+    * {
+      font-family:'MICROSOFT YAHEI'
+    }
+    </style>
+</head>
+<body >
+
+  <div ng-controller="myCtrl">
+      <div class="dropdown" dropdown >
+          <button class="btn btn-default dropdown-toggle" type="button" ng-mouseenter = "showMenu()" ng-mouseleave = "hideMenu()">
+              Dropdown
+              <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" ng-show="ifShowMenu" ng-mouseenter = "showMenu()" ng-mouseleave = "hideMenu()">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li><a href="#">Separated link</a></li>
+          </ul>
+      </div>
+  </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
