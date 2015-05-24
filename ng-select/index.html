@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="selectApp">
+<head>
+  <title>ng-select</title>
+  <meta charset="utf-8">
+  <script src="../angular.js"></script>
+  <script src="script.js"></script>
+  <style type="text/css">
+    * {
+      font-family:'MICROSOFT YAHEI'
+    }
+  </style>
+</head>
+<body >
+
+  <div ng-controller="myCtrl">
+      <select
+              ng-model = "myOption"
+              ng-options = "opt.value as opt.label group by opt.group for opt in myOptions">
+          <option value="">-- 请选择 --</option>
+      </select>
+      <p>{{myOption}}</p>
+  </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
